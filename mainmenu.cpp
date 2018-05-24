@@ -2,6 +2,8 @@
 #include "ui_mainmenu.h"
 #include "calibration.h"
 #include "taskchoice.h"
+#include "taskwindow.h"
+#include "taskinfo.h"
 
 MainMenu::MainMenu(QWidget *parent) :
     QMainWindow(parent),
@@ -27,19 +29,23 @@ void MainMenu::on_startButton_clicked()
 
     t_choice.setModal(true);
 
-    t_choice.exec();
+    if (t_choice.exec() == QDialog::Accepted)
+    {
+        task = t_choice.get();
 
-    task = t_choice.get();
-
-    //Caso treino selecionado
-    if (task == 1){
-        velocity = ui->trainingVelBox->text().toInt();
-        repetitions = ui->trainingRepBox->text().toInt();
-    }
-    //Caso aquisição selecionada
-    else if (task == 2){
-        velocity = ui->acquiVelBox->text().toInt();
-        repetitions = ui->acquiRepBox->text().toInt();
+        //Caso treino selecionado
+        if (task == 1){
+            velocity = ui->trainingVelBox->text().toInt();
+            repetitions = ui->trainingRepBox->text().toInt();
+        }
+        //Caso aquisição selecionada
+        else if (task == 2){
+            velocity = ui->acquiVelBox->text().toInt();
+            repetitions = ui->acquiRepBox->text().toInt();
+        }
+    } else
+    {
+        return;
     }
 
     if (ui->flexButton->isChecked())
@@ -49,6 +55,16 @@ void MainMenu::on_startButton_clicked()
     {
         cam = WEBCAM;
     }
+
+    this->hide();
+
+    TaskWindow maintask;
+
+    maintask.setInfo(cam, repetitions, velocity, task);
+    maintask.setModal(true);
+    maintask.showMaximized();
+    maintask.exec();
+
 }
 
 void MainMenu::on_calibrationButton_clicked()

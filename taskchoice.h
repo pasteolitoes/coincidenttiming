@@ -20,11 +20,12 @@ public:
     int task_type;
 
 private slots:
-    void on_backButton_clicked();
 
     void on_trainButton_clicked();
 
     void on_acquiButton_clicked();
+
+    void on_backButton_clicked();
 
 private:
     Ui::TaskChoice *ui;

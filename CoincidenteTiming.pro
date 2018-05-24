@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui serialport
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -29,18 +29,23 @@ SOURCES += \
         mainmenu.cpp \
     calibration.cpp \
     calibration.cpp \
-    taskchoice.cpp
+    taskchoice.cpp \
+    taskwindow.cpp \
+    task.cpp
 
 HEADERS += \
         mainmenu.h \
     calibration.h \
     calibration.h \
-    taskchoice.h
+    taskchoice.h \
+    taskwindow.h \
+    task.h
 
 FORMS += \
         mainmenu.ui \
     calibration.ui \
-    taskchoice.ui
+    taskchoice.ui \
+    taskwindow.ui
 
 INCLUDEPATH += "C:\\opencv_build\\install\\include" \
                "C:\\opencv_build\\install\\include\\opencv" \
