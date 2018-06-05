@@ -1,6 +1,6 @@
-#include "task.h"
+//#include "task.h"
 
-Task::Task(int cam, int task, int velocity, int repetitions) : QObject(cam)
-{
+//Task::Task(int cam, int task, int velocity, int repetitions) : QObject(cam)
+//{
 
-}
+//}

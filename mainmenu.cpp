@@ -3,7 +3,6 @@
 #include "calibration.h"
 #include "taskchoice.h"
 #include "taskwindow.h"
-#include "taskinfo.h"
 
 MainMenu::MainMenu(QWidget *parent) :
     QMainWindow(parent),
@@ -63,6 +62,8 @@ void MainMenu::on_startButton_clicked()
     maintask.setInfo(cam, repetitions, velocity, task);
     maintask.setModal(true);
     maintask.showMaximized();
+    maintask.show();
+    maintask.startCamera(cam);
     maintask.exec();
 
 }
