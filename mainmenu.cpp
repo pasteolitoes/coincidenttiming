@@ -61,9 +61,9 @@ void MainMenu::on_startButton_clicked()
 
     maintask.setInfo(cam, repetitions, velocity, task);
     maintask.setModal(true);
-    maintask.showMaximized();
     maintask.show();
-    maintask.startCamera(cam);
+    //maintask.showMaximized();
+//    maintask.startCamera(cam);
     maintask.exec();
 
 }

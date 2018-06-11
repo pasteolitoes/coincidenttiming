@@ -53,6 +53,9 @@ INCLUDEPATH += "C:\\opencv_build\\install\\include" \
 
 INCLUDEPATH += "C:\\Camera SDK\\include"
 
+LIBS += -L"C:\\Camera SDK\\lib" \
+-lCameraLibrary2015x64S
+
 LIBS += -L"C:\\opencv_build\\install\\x64\\vc14\\lib" \
 -lopencv_core330 \
 -lopencv_calib3d330 \

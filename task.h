@@ -11,12 +11,15 @@
 //#include <opencv\cv.h>
 //#include <opencv2\videoio.hpp>
 //#include <cameralibrary.h>
+//#include "taskwindow.h"
 
 //class Task : public QObject
 //{
 //    Q_OBJECT
 //public:
-//    explicit Task(int cam, int task, int velocity, int repetitions);
+//    explicit Task();
+
+//    ~Task();
 
 //    /* ------Variáveis básicas da tarefa------ */
 //    int taskType;
@@ -42,7 +45,7 @@
 //    const int BACKBUFFER_BITSPERPIXEL = 8;
 
 //    cv::VideoCapture capture;
-//    CameraLibrary::Camera *camera;
+//    CameraLibrary::Camera *camFlex;
 
 //    /*------Variáveis de calibração e processamento------*/
 
@@ -54,11 +57,13 @@
 //signals:
 //    void frameReady();
 
-//public slots:
+//public:
+//    void setInfo(int camera, int rep, int vel, int type);
 
+//    void startCamera(camera);
 
 //private:
-
+//    TaskWindow twindow;
 //};
 
 //#endif // TASK_H

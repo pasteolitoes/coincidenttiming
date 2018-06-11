@@ -1,6 +1,22 @@
 //#include "task.h"
+//#include "taskwindow.h"
 
-//Task::Task(int cam, int task, int velocity, int repetitions) : QObject(cam)
+//using namespace CameraLibrary;
+
+//Task::Task()
 //{
 
 //}
+
+//void Task::setInfo(int camera, int rep, int vel, int type)
+//{
+//    cam = camera;
+//    taskRep = rep;
+//    taskType = type;
+//    taskVel = vel;
+
+
+//}
+
+
+

@@ -12,6 +12,8 @@ TaskWindow::TaskWindow(QWidget *parent) :
 
 TaskWindow::~TaskWindow()
 {
+
+    this->close();
     delete ui;
 }
 
@@ -37,10 +39,11 @@ void TaskWindow::setInfo(int camera, int rep, int vel, int type)
     return;
 }
 
-void TaskWindow::startCamera(int camera)
+
+void TaskWindow::on_startTaskButton_clicked()
 {
-    cv::namedWindow("Imagem Tarefa");
-    if (camera == WEBCAM)
+    cv::namedWindow("nessec", cv::WINDOW_NORMAL);
+    if (cam == WEBCAM)
     {
         cv::Mat matFrame;
         //cv::Mat grayScale;
@@ -53,9 +56,16 @@ void TaskWindow::startCamera(int camera)
         {
             if(breakLoop == true) return;
 
-            capture.read(matFrame);
+            capture >> matFrame;
 
-            cv::imshow("Imagem Tarefa", matFrame);
+//            cv::imshow("Imagem Tarefa", matFrame);
+
+            cv::resize(matFrame, matFrame, cv::Size(ui->label_image->width(), ui->label_image->height()));
+
+            QImage imgFrame = QImage((uchar*) matFrame.data, matFrame.cols, matFrame.rows, matFrame.step, QImage::Format_RGB888);
+            QPixmap pixFrame = QPixmap::fromImage(imgFrame);
+
+            ui->label_image->setPixmap(pixFrame);
 
             if(GetAsyncKeyState(VK_ESCAPE)){
                 breakLoop = true;
@@ -66,12 +76,12 @@ void TaskWindow::startCamera(int camera)
 
     }
     //Inicia a câmera FLEX13 e começa a gravação de imagem
-    else if (camera == FLEX13)
+    else if (cam == FLEX13)
     {
         CameraManager::X().WaitForInitialization();
         camFlex = CameraManager::X().GetCamera();
 
-        if(!camera){
+        if(!camFlex){
             qDebug() << QString("Camera não encontrada!");
         }
 
@@ -88,7 +98,7 @@ void TaskWindow::startCamera(int camera)
         cv::Mat finalFrame;
         matFrame.copyTo(finalFrame);
 
-        Frame *frame = camera->getFrame;
+        Frame *frame = camFlex->GetFrame();
 
         while(true)
         {
@@ -112,7 +122,7 @@ void TaskWindow::startCamera(int camera)
 //                para_timer();
 //            }
 
-            threshold(matFrame, matFrame, 200, 255, THRESH_BINARY);
+            threshold(matFrame, matFrame, 200, 255, cv::THRESH_BINARY);
 
 //            findTargetFlex(matFrame, finalFrame);
 
@@ -126,4 +136,3 @@ void TaskWindow::startCamera(int camera)
         }
     }
 }
-

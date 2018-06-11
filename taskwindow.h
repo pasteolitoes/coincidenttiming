@@ -73,6 +73,9 @@ public:
 
     void startCamera(int camera);
 
+private slots:
+    void on_startTaskButton_clicked();
+
 private:
 
 
@@ -80,8 +83,6 @@ private:
     Ui::TaskWindow *ui;
 
     QTimer timer;
-
-    QThread workerThread;
 };
 
 #endif // TASKWINDOW_H
