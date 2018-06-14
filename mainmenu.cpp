@@ -62,10 +62,13 @@ void MainMenu::on_startButton_clicked()
     maintask.setInfo(cam, repetitions, velocity, task);
     maintask.setModal(true);
     maintask.show();
-    //maintask.showMaximized();
+    maintask.showMaximized();
 //    maintask.startCamera(cam);
-    maintask.exec();
+    if(maintask.exec()){
 
+    }
+
+    this->show();
 }
 
 void MainMenu::on_calibrationButton_clicked()

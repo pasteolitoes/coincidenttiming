@@ -8,12 +8,21 @@
 #include <QTimer>
 #include <QThread>
 #include <QDebug>
+#include <QTime>
+#include <QSound>
+#include <QFileDialog>
+#include <QDir>
+#include <QMessageBox>
+#include <QTextStream>
+#include <QDateTime>
+#include <QVector>
 #include <opencv2\opencv.hpp>
 #include <opencv\highgui.h>
 #include <opencv\cv.h>
 #include <opencv2\videoio.hpp>
 #include <cameralibrary.h>
 #include <windows.h>
+#include "chronometer.h"
 
 namespace Ui {
 class TaskWindow;
@@ -34,13 +43,9 @@ public:
     int taskRep;
     int taskVel;
     int cam;
-    int flag = 0;
-
-    bool breakLoop = false;
 
     /* ------Variáveis do alvo------*/
     double area;
-    int score = 0;
     bool targetFound = false;
     const int MIN_OBJECT_AREA = 200;
     const int MAX_OBJECT_AREA = 30000;
@@ -69,20 +74,70 @@ public:
 
 public:
 
-    void setInfo(int camera, int rep, int vel, int type);
+    void
+    setInfo(int camera, int rep, int vel, int type);
 
-    void startCamera(int camera);
+    void
+    startCamera(int camera);
+
+    void
+    firstState();
+
+signals:
+    void
+    finishedTask();
 
 private slots:
-    void on_startTaskButton_clicked();
+    void
+    on_startTaskButton_clicked();
+
+    void
+    on_exitButton_clicked();
+
+    void
+    nextState();
+
+    void
+    updateTime();
+
+    void
+    restartState();
+
+    void
+    onFinished();
 
 private:
+    void
+    findTarget(cv::Mat &inFrame, cv::Mat &outFrame);
 
 
 private:
     Ui::TaskWindow *ui;
 
-    QTimer timer;
+    QTimer clockTimer;
+
+    QVector<QTime> times;
+    QVector<int> score;
+
+    Chronometer c;
+
+    int state = -1;
+
+    int doneCount = 0;
+
+    int flag = 0;
+
+    int nBlocks = 10;
+
+    QTime t0;
+
+    bool firstFlag = false;
+
+    bool breakLoop = false;
+
+    bool finalFlag = false;
+
+    bool FIM = false;
 };
 
 #endif // TASKWINDOW_H

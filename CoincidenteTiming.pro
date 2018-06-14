@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui serialport
+QT       += core gui serialport multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -31,7 +31,8 @@ SOURCES += \
     calibration.cpp \
     taskchoice.cpp \
     taskwindow.cpp \
-    task.cpp
+    task.cpp \
+    chronometer.cpp
 
 HEADERS += \
         mainmenu.h \
@@ -39,7 +40,8 @@ HEADERS += \
     calibration.h \
     taskchoice.h \
     taskwindow.h \
-    task.h
+    task.h \
+    chronometer.h
 
 FORMS += \
         mainmenu.ui \
@@ -93,3 +95,6 @@ LIBS += -L"C:\\opencv_build\\install\\x64\\vc14\\lib" \
 -lopencv_videostab330d
 
 LIBS += -lUser32
+
+RESOURCES += \
+    sounds.qrc
